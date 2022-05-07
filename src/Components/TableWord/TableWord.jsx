@@ -10,8 +10,9 @@ export default function TableWord({id,url,clickHandler,levelRate,level,deleteWor
             <td aria-label="Location">{level}</td>
             <td aria-label="Location">{levelRate}</td>
             <td>
-                <button onClick={()=>clickHandler(id)}>details</button>
-                <button onClick={()=>deleteWordHandler(id)}>delete</button>
+                <button className="detailsButton viewButton" onClick={()=>clickHandler(id)}>Chart</button>
+                <button className="deleteButton" onClick={()=>deleteWordHandler(id)}></button>
+                <button className="refreshButton" onClick={()=>deleteWordHandler(id)}></button>
             </td>
         </tr>
     </React.Fragment>

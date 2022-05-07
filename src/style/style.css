@@ -1,0 +1,160 @@
+
+table {
+    width: 100%;
+}
+table thead tr {
+    background: transparent;
+}
+table thead tr h1,
+table thead tr h2,
+table thead tr .h1,
+table thead tr .h2,
+table thead tr h3,
+table thead tr .h3,
+table thead tr h4,
+table thead tr .h4 {
+    color: white;
+}
+
+table thead tr a:hover,
+table thead tr a:focus {
+    color: white;
+}
+table tbody tr {
+    border-top: 1px solid rgba(117, 117, 117, 0.4);
+    background: transparent;
+}
+table td,
+table th {
+    padding: 16px 14px;
+    text-align: left;
+    font-size: 1.1rem;
+}
+table td a,
+table th a {
+    font-weight: bold;
+    color: #00918a !important;
+}
+table td a:hover,
+table th a:hover,
+table td a:focus,
+table th a:focus {
+    color: white !important;
+}
+table th {
+    font-weight: 700;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    font-family: "Gotham SSm A", "Gotham SSm B", Helvetica, sans-serif;
+    margin: 0;
+    max-width: 800px;
+    line-height: inherit;
+    color: #757575;
+    font-size: 14px;
+}
+table th.PrimaryFont {
+    text-transform: none;
+}
+
+
+@media only screen and (max-width: 599px) {
+    table th {
+        display: none;
+    }
+    table td {
+        position: relative;
+        display: block;
+        padding-left: 110px;
+    }
+    table td:before {
+        position: absolute;
+        top: 8px;
+        left: 10px;
+        display: block;
+        content: attr(aria-label) ": ";
+        font-weight: 700;
+    }
+    table tbody tr {
+        padding: 20px 0;
+        display: block;
+    }
+    table:nth-of-type(odd) {
+        background: #f3f3f3;
+    }
+}
+
+/* For display in CodePen */
+body {
+    padding: 20px;
+    background-color: #040000;
+}
+table {
+    border-collapse: collapse;
+    color: white;
+}
+
+.loader{
+    width: 100%;
+    text-align: center;
+}
+.detailsButton{
+    background-color: #757575;
+    color: white;
+    border: none;
+    padding: 4px 12px;
+    border-radius: 4px;
+    margin: 4px;
+    font-weight: bold;
+
+}
+
+.backButton {
+    font-size: 25px;
+    color: white;
+    position: fixed !important;
+    right: 20px;
+    bottom: 20px;
+    background-color: #3E92CC;
+    border: 0;
+    border-radius: 8px;
+    cursor: pointer;
+    background-image: url('./svg/angles-left.svg');
+    width: 40px;
+    height: 40px;
+}
+
+.refreshAll{
+    background-image: url('./svg/arrows-rotate.svg');
+    background-repeat: no-repeat;
+    width: 15px;
+    background-color: transparent;
+    height: 15px;
+    border: 0;
+    cursor: pointer;
+    margin-left: 4px;
+    position: absolute;
+}
+
+button{
+    cursor: pointer;
+}
+.refreshButton{
+    background-image: url('./svg/refresh.svg');
+    background-repeat: no-repeat;
+    width: 15px;
+    background-color: transparent;
+    height: 15px;
+    border: 0;
+    cursor: pointer;
+    margin-left: 4px;
+}
+.deleteButton{
+    background-image: url('./svg/trash-can.svg');
+    background-repeat: no-repeat;
+    width: 15px;
+    background-color: transparent;
+    height: 15px;
+    border: 0;
+    cursor: pointer;
+    margin-left: 4px;
+}

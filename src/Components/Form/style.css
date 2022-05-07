@@ -1,16 +1,63 @@
-.form{
-    width: 100%;
-  height: 100%;
+.form {
+  height: 170px;
+  border-radius: 32px;
+  backdrop-filter: blur(8px);
+  color: white;
+
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
+  align-content: center;
 }
 .saveButton{
   color: white;
-  background-color: green;
   font-size: 20px;
+  border:0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-left: 10px;
+  background: #3E92CC;
+
+}
+input.textBoxSave {
+  background: transparent;
+  border: 0;
+  color: white;
+  padding: 16px;
+  margin-right: 8px;
+}
+.saveSection {
+  padding: 8px 24px;
+  border-radius: 16px;
+  background-color: #222;
 }
 .textBoxSave{
   font-size: 20px;
+}
+
+.textBoxSave:focus{
+  outline: none;
+}
+.logoSection{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: stretch;
+}
+.logoSection img {
+  height: 120px;
+  margin-bottom: 16px;
+  margin-right: -8px;
+}
+
+.marginNone{
+  margin: 0;
+}
+
+.subHeader{
+  color:#757575;
 }

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
-import "./style.css";
+import "./style/style.css";
 import Table from './Components/Table';
-import Spinner from './Spinner-1s-200px.gif';
+import Spinner from './style/svg/Magnify-1.9s-231px.gif';
 import UrlTableHeader from './Components/UrlTableHeader';
 import WordTableHeader from './Components/WordTableHeader';
 import TableWord from "./Components/TableWord";
@@ -115,7 +115,7 @@ export default function App() {
             {search && <img src={Spinner} alt="loader"/>}
         </div>
         <div>
-            {!stateDomain && <button onClick={backClick}>back</button>}
+            {!stateDomain && <button className="backButton" onClick={backClick}></button>}
         </div>
     </React.Fragment>
 }

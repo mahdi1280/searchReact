@@ -6,6 +6,6 @@ export default function WordTableHeader() {
     <th>word</th>
     <th>level</th>
     <th>rate</th>
-    <th>....</th>
+    <th>Details<button className="refreshAll"></button></th>
     </thead>
 }

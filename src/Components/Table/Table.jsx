@@ -8,8 +8,8 @@ export default function Table({id,url,clickHandler,deleteHandler}){
         </td>
         <td aria-label="Location">{url}</td>
             <td>
-                <button onClick={()=>clickHandler(id)}>details</button>
-                <button onClick={()=>deleteHandler(id)}>delete</button>
+                <button className="detailsButton viewButton" onClick={()=>clickHandler(id)}>View</button>
+                <button className="detailsButton deleteButton" onClick={()=>deleteHandler(id)}></button>
             </td>
         </tr>
     </React.Fragment>
