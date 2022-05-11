@@ -6,26 +6,31 @@ import UrlTableHeader from './Components/UrlTableHeader';
 import WordTableHeader from './Components/WordTableHeader';
 import TableWord from "./Components/TableWord";
 import Form from "./Components/Form";
+import MyChart from "./Components/MyChart";
 
 export default function App() {
 
-    const [data, setData] = useState([]);
+    const [data1, setData] = useState([]);
     const [search, setSearch] = useState(true);
-    const [url, setUrl] = useState("http://localhost:8080/domain");
+        const [url, setUrl] = useState("http://127.0.0.1:8080/domain");
     const [stateDomain, setStateDomain] = useState(true);
-    const [domainId, setDomainId] = useState(0);
+    const [domainId, setDomainId] = usenpmState(0);
+    const [domain, setDomain] = useState();
+    const [refreshId, setRefreshId] = useState([]);
+    const [chartData, setChartData] = useState();
+    const [wordId, setWordId] = useState();
 
-    function clickHandler(id) {
+    function clickHandler(id, url) {
         setSearch(true);
-        setUrl(`http://localhost:8080/word/domain/${id}`);
+        setUrl(`http://127.0.0.1:8080/word/domain/${id}`);
+        setDomain(url);
         setDomainId(id);
         setStateDomain(false);
     }
 
     function backClick() {
-        setUrl("http://localhost:8080/domain");
+        setUrl("http://127.0.0.1:8080/domain");
         setStateDomain(true);
-
     }
 
     useEffect(() => {
@@ -34,79 +39,136 @@ export default function App() {
             .then(response => {
                 setSearch(false);
                 setData(response)
-            });
+            }).catch(console.log);
     }, [url])
+
 
     function handlerSaveUrlClick(text) {
         const requestOptions = {
+            
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({url: text})
         };
-        fetch('http://localhost:8080/domain', requestOptions)
+        fetch('http://127.0.0.1:8080/domain', requestOptions)
             .then(() => {
                 setSearch(true);
-                setUrl("http://localhost:8081/domain");
-                setUrl("http://localhost:8080/domain");
+                setUrl("http://127.0.0.1:8081/domain");
+                setUrl("http://127.0.0.1:8080/domain");
             })
     }
 
     function handlerSaveWordClick(text) {
         const requestOptions = {
+            
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({domainId: domainId, title: text})
         };
-        fetch('http://localhost:8080/word', requestOptions)
+        fetch('http://127.0.0.1:8080/word', requestOptions)
             .then(() => {
                 setSearch(true);
-                setUrl(`http://localhost:8081/word/domain/${domainId}`);
-                setUrl(`http://localhost:8080/word/domain/${domainId}`);
+                setUrl(`http://127.0.0.1:8081/word/domain/${domainId}`);
+                setUrl(`http://127.0.0.1:8080/word/domain/${domainId}`);
             })
     }
 
-    function deleteHandler(id){
+    function arrayRemove(arr, value) {
+        return arr.filter(function (geeks) {
+            return geeks !== value;
+        });
+    }
+
+    function onceRefresh(wordId) {
+        setRefreshId((r) => [...r, wordId]);
+        fetch(`http://127.0.0.1:8080/word/${wordId}/domain/${domainId}`, {
+            crossDomain: true
+        })
+            .then((response) => {
+                return response.json();
+            }).then((response) => {
+            setData(response)
+            setRefreshId(arrayRemove(refreshId, wordId))
+        });
+    }
+
+    function refreshAll() {
+        setSearch(true);
+        fetch(`http://127.0.0.1:8080/word/refreshAll/refresh/domain/${domainId}`)
+            .then((response) => {
+                return response.json();
+            }).then((response) => {
+            setData(response)
+            setSearch(false);
+        });
+    }
+
+    function deleteHandler(id) {
         const requestOptions = {
+            
             method: 'DELETE',
             headers: {'Content-Type': 'application/json'}
         };
-        fetch(`http://localhost:8080/domain/${id}`, requestOptions)
+        fetch(`http://127.0.0.1:8080/domain/${id}`, requestOptions)
             .then(() => {
                 setSearch(true);
-                setUrl("http://localhost:8081/domain");
-                setUrl("http://localhost:8080/domain");
+                setUrl("http://127.0.0.1:8081/domain");
+                setUrl("http://127.0.0.1:8080/domain");
             })
     }
 
-    function deleteWordHandler(id){
+    function deleteWordHandler(id) {
         const requestOptions = {
+            
             method: 'DELETE',
             headers: {'Content-Type': 'application/json'}
         };
-        fetch(`http://localhost:8080/word/${id}`, requestOptions)
-            .then(()=> {
+        fetch(`http://127.0.0.1:8080/word/${id}`, requestOptions)
+            .then(() => {
                 setSearch(true);
-                setUrl(`http://localhost:8081/word/domain/${domainId}`);
-                setUrl(`http://localhost:8080/word/domain/${domainId}`);
+                setUrl(`http://127.0.0.1:8081/word/domain/${domainId}`);
+                setUrl(`http://127.0.0.1:8080/word/domain/${domainId}`);
             })
     }
 
-    const rows = data.map(row => {
+    function showChart(id) {
+
+        if (!chartData) {
+            fetch(`http://127.0.0.1:8080/word/${id}`)
+                .then((response) => {
+                    return response.json();
+                }).then((response) => {
+                setChartData(response.data);
+                setWordId(id);
+                window.scrollTo(0, 100 * wordId);
+            });
+        } else {
+            setChartData();
+        }
+    }
+
+    const rows = data1.map(row => {
         if (row.message) {
-            return <p>{row.message}</p>
+            return <p className="errorCode">{row.message}</p>
         }
         if (row.url) {
-            return <Table deleteHandler={deleteHandler} clickHandler={clickHandler} key={row.id} id={row.id} url={row.url}/>
+            return <Table deleteHandler={deleteHandler} clickHandler={clickHandler} key={row.id} id={row.id}
+                          url={row.url}/>
         }
-        return <TableWord deleteWordHandler={deleteWordHandler} clickHandler={clickHandler} key={row.id} id={row.id} url={row.title} level={row.level}
-                          levelRate={row.levelRate}/>;
+        return <React.Fragment><TableWord showChart={showChart} refreshId={refreshId}
+                                          deleteWordHandler={deleteWordHandler} onceRefresh={onceRefresh} key={row.id}
+                                          id={row.id} url={row.title}
+                                          level={row.level}
+                                          levelRate={row.levelRate}/> {(chartData && wordId === row.id) ?
+            <MyChart chartData={chartData}/> : null}</React.Fragment>;
     });
     return <React.Fragment>
         {stateDomain && <Form handlerSaveUrlClick={handlerSaveUrlClick}/>}
         {!stateDomain && <Form handlerSaveUrlClick={handlerSaveWordClick}/>}
+        {domain && <p className="urlName">Target: {domain}</p>}
         <table>
             {stateDomain && <UrlTableHeader/>}
-            {!stateDomain && <WordTableHeader/>}
+            {!stateDomain && <WordTableHeader refreshAll={refreshAll}/>}
             <tbody>
             {!search && rows}
             </tbody>
@@ -116,6 +178,9 @@ export default function App() {
         </div>
         <div>
             {!stateDomain && <button className="backButton" onClick={backClick}></button>}
+        </div>
+        <div className="footer">
+            <h6><a href="http://www.github.com/mahdi1280">DEV.MK 🤏</a></h6>
         </div>
     </React.Fragment>
 }

@@ -1,3 +1,19 @@
+/*@font-face {*/
+/*    font-family: iranyekan;*/
+/*    font-style: normal;*/
+/*    font-weight: bold;*/
+/*    src: url('./font/IRANYekanWebBold.eot'),*/
+/*    url('./font/IRANYekanWebBold.ttf'),*/
+/*    url('./font/IRANYekanWebBold.woff2');*/
+/*}*/
+
+@font-face {
+    font-family: iranyekan;
+    font-style: normal;
+    font-weight: 400;
+    src: url('./font/IRANYekanWebMedium.ttf'),
+    url('./font/IRANYekanWebMedium.woff2');
+}
 
 table {
     width: 100%;
@@ -14,6 +30,7 @@ table thead tr .h3,
 table thead tr h4,
 table thead tr .h4 {
     color: white;
+    font-family: iranyekan;
 }
 
 table thead tr a:hover,
@@ -82,11 +99,10 @@ table th.PrimaryFont {
         background: #f3f3f3;
     }
 }
-
-/* For display in CodePen */
 body {
     padding: 20px;
     background-color: #040000;
+    font-family: iranyekan;
 }
 table {
     border-collapse: collapse;
@@ -116,11 +132,15 @@ table {
     bottom: 20px;
     background-color: #3E92CC;
     border: 0;
-    border-radius: 8px;
     cursor: pointer;
     background-image: url('./svg/angles-left.svg');
     width: 40px;
     height: 40px;
+    background-repeat: no-repeat;
+    border-radius: 8px;
+    padding: 10px 14px;
+    background-position: center;
+    background-size: 24px;
 }
 
 .refreshAll{
@@ -157,4 +177,46 @@ button{
     border: 0;
     cursor: pointer;
     margin-left: 4px;
+}
+.errorCode{
+    text-align: center;
+}
+.urlName{
+    color: white;
+    padding: 8px 16px;
+    font-size: 1.6rem;
+    margin: 0;
+}
+.trRefresh{
+    background: #222222;
+    border-radius: 8px;
+}
+
+.rotate{
+    animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.chart{
+    width: 80%;
+    height: 50vh;
+    margin: auto;
+}
+.footer{
+    position: fixed;
+    bottom: 0;
+    left: 20px;
+    color: white;
+}
+
+.footer a{
+    color: white;
+    text-decoration: none;
 }
