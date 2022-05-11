@@ -8,7 +8,7 @@ export default function Table({id,url,clickHandler,deleteHandler}){
         </td>
         <td aria-label="Location">{url}</td>
             <td>
-                <button className="detailsButton viewButton" onClick={()=>clickHandler(id)}>View</button>
+                <button className="detailsButton viewButton" onClick={()=>clickHandler(id,url)}>View</button>
                 <button className="detailsButton deleteButton" onClick={()=>deleteHandler(id)}></button>
             </td>
         </tr>

@@ -1,3 +1,19 @@
+/*@font-face {*/
+/*    font-family: iranyekan;*/
+/*    font-style: normal;*/
+/*    font-weight: bold;*/
+/*    src: url('./font/IRANYekanWebBold.eot'),*/
+/*    url('./font/IRANYekanWebBold.ttf'),*/
+/*    url('./font/IRANYekanWebBold.woff2');*/
+/*}*/
+
+@font-face {
+    font-family: iranyekan;
+    font-style: normal;
+    font-weight: 400;
+    src: url('./font/IRANYekanWebMedium.ttf'),
+    url('./font/IRANYekanWebMedium.woff2');
+}
 
 table {
     width: 100%;
@@ -14,6 +30,7 @@ table thead tr .h3,
 table thead tr h4,
 table thead tr .h4 {
     color: white;
+    font-family: iranyekan;
 }
 
 table thead tr a:hover,
@@ -57,36 +74,15 @@ table th.PrimaryFont {
 }
 
 
-@media only screen and (max-width: 599px) {
-    table th {
-        display: none;
-    }
-    table td {
-        position: relative;
-        display: block;
-        padding-left: 110px;
-    }
-    table td:before {
-        position: absolute;
-        top: 8px;
-        left: 10px;
-        display: block;
-        content: attr(aria-label) ": ";
-        font-weight: 700;
-    }
-    table tbody tr {
-        padding: 20px 0;
-        display: block;
-    }
-    table:nth-of-type(odd) {
-        background: #f3f3f3;
+@media only screen and (max-width: 950px) {
+    .urlName{
+        margin-top: 40px !important;
     }
 }
-
-/* For display in CodePen */
 body {
     padding: 20px;
     background-color: #040000;
+    font-family: iranyekan;
 }
 table {
     border-collapse: collapse;
@@ -98,7 +94,7 @@ table {
     text-align: center;
 }
 .detailsButton{
-    background-color: #757575;
+    background-color: #3E92CC;
     color: white;
     border: none;
     padding: 4px 12px;
@@ -116,11 +112,15 @@ table {
     bottom: 20px;
     background-color: #3E92CC;
     border: 0;
-    border-radius: 8px;
     cursor: pointer;
     background-image: url('./svg/angles-left.svg');
     width: 40px;
     height: 40px;
+    background-repeat: no-repeat;
+    border-radius: 8px;
+    padding: 10px 14px;
+    background-position: center;
+    background-size: 24px;
 }
 
 .refreshAll{
@@ -157,4 +157,59 @@ button{
     border: 0;
     cursor: pointer;
     margin-left: 4px;
+}
+.errorCode{
+    text-align: center;
+}
+.urlName{
+    color: white;
+    padding: 8px 16px;
+    font-size: 1.6rem;
+    margin: 0;
+}
+.trRefresh{
+    background: #222222;
+    border-radius: 8px;
+}
+
+.rotate{
+    animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.chart{
+    width: 80%;
+    margin: auto;
+}
+.footer{
+    position: fixed;
+    bottom: 0;
+    left: 20px;
+    color: white;
+}
+
+.footer a{
+    color: white;
+    text-decoration: none;
+}
+.levelRateAsc{
+    background-color: #1bff0080;
+    text-align: center;
+    border-radius: 4px;
+    width: 32px;
+    color: #040000;
+}
+.levelRateDesc{
+    background-color: #ff0000b0;
+    text-align: center;
+    border-radius: 4px;
+    width: 32px;
+    color: #040000;
 }

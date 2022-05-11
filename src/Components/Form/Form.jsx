@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 import './style.css';
-
+import logo from './logo.gif';
 export default function Form({handlerSaveUrlClick}) {
     const [text, changeText] = useState('');
     return <div className="form">
         <div className="logoSection">
-            <img src="https://i.pinimg.com/originals/b8/1d/57/b81d57eef7c9a758a3982d5e5182e042.gif" alt="logo"/>
+            <img src={logo} alt="logo"/>
             <div>
                 <h1 className="marginNone">RateWatch</h1>
                 <h3 className="marginNone subHeader">View your site's keyword rankings in Google.</h3>
