@@ -12,24 +12,25 @@ export default function App() {
 
     const [data1, setData] = useState([]);
     const [search, setSearch] = useState(true);
-    const [url, setUrl] = useState("http://127.0.0.1:8080/domain");
+    const [url, setUrl] = useState("https://168.119.85.41:8080/domain");
     const [stateDomain, setStateDomain] = useState(true);
     const [domainId, setDomainId] = useState(0);
     const [domain, setDomain] = useState();
     const [refreshId, setRefreshId] = useState([]);
     const [chartData, setChartData] = useState();
     const [wordId, setWordId] = useState();
+    const [indexChart,setIndexChart] = useState();
 
     function clickHandler(id, url) {
         setSearch(true);
-        setUrl(`http://127.0.0.1:8080/word/domain/${id}`);
+        setUrl(`https://168.119.85.41:8080/word/domain/${id}`);
         setDomain(url);
         setDomainId(id);
         setStateDomain(false);
     }
 
     function backClick() {
-        setUrl("http://127.0.0.1:8080/domain");
+        setUrl("https://168.119.85.41:8080/domain");
         setStateDomain(true);
     }
 
@@ -42,6 +43,9 @@ export default function App() {
             }).catch(console.log);
     }, [url])
 
+    useEffect(() => {
+        window.scrollTo(0, (indexChart+1)*40 + 240);
+    },[indexChart]);
 
     function handlerSaveUrlClick(text) {
         const requestOptions = {
@@ -50,11 +54,11 @@ export default function App() {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({url: text})
         };
-        fetch('http://127.0.0.1:8080/domain', requestOptions)
+        fetch('https://168.119.85.41:8080/domain', requestOptions)
             .then(() => {
                 setSearch(true);
-                setUrl("http://127.0.0.1:8081/domain");
-                setUrl("http://127.0.0.1:8080/domain");
+                setUrl("https://168.119.85.41:8081/domain");
+                setUrl("https://168.119.85.41:8080/domain");
             })
     }
 
@@ -65,11 +69,11 @@ export default function App() {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({domainId: domainId, title: text})
         };
-        fetch('http://127.0.0.1:8080/word', requestOptions)
+        fetch('https://168.119.85.41:8080/word', requestOptions)
             .then(() => {
                 setSearch(true);
-                setUrl(`http://127.0.0.1:8081/word/domain/${domainId}`);
-                setUrl(`http://127.0.0.1:8080/word/domain/${domainId}`);
+                setUrl(`https://168.119.85.41:8081/word/domain/${domainId}`);
+                setUrl(`https://168.119.85.41:8080/word/domain/${domainId}`);
             })
     }
 
@@ -81,7 +85,7 @@ export default function App() {
 
     function onceRefresh(wordId) {
         setRefreshId((r) => [...r, wordId]);
-        fetch(`http://127.0.0.1:8080/word/${wordId}/domain/${domainId}`, {
+        fetch(`https://168.119.85.41:8080/word/${wordId}/domain/${domainId}`, {
             crossDomain: true
         })
             .then((response) => {
@@ -94,7 +98,7 @@ export default function App() {
 
     function refreshAll() {
         setSearch(true);
-        fetch(`http://127.0.0.1:8080/word/refreshAll/refresh/domain/${domainId}`)
+        fetch(`https://168.119.85.41:8080/word/refreshAll/refresh/domain/${domainId}`)
             .then((response) => {
                 return response.json();
             }).then((response) => {
@@ -105,49 +109,50 @@ export default function App() {
 
     function deleteHandler(id) {
         const requestOptions = {
-
             method: 'DELETE',
             headers: {'Content-Type': 'application/json'}
         };
-        fetch(`http://127.0.0.1:8080/domain/${id}`, requestOptions)
-            .then(() => {
-                setSearch(true);
-                setUrl("http://127.0.0.1:8081/domain");
-                setUrl("http://127.0.0.1:8080/domain");
-            })
+        if (confirm("Are you sure?")) {
+            fetch(`https://168.119.85.41:8080/domain/${id}`, requestOptions)
+                .then(() => {
+                    setSearch(true);
+                    setUrl("https://168.119.85.41:8081/domain");
+                    setUrl("https://168.119.85.41:8080/domain");
+                })
+        }
     }
 
     function deleteWordHandler(id) {
         const requestOptions = {
-
             method: 'DELETE',
             headers: {'Content-Type': 'application/json'}
         };
-        fetch(`http://127.0.0.1:8080/word/${id}`, requestOptions)
-            .then(() => {
-                setSearch(true);
-                setUrl(`http://127.0.0.1:8081/word/domain/${domainId}`);
-                setUrl(`http://127.0.0.1:8080/word/domain/${domainId}`);
-            })
+        if (confirm("Are you sure?")) {
+            fetch(`https://168.119.85.41:8080/word/${id}`, requestOptions)
+                .then(() => {
+                    setSearch(true);
+                    setUrl(`https://168.119.85.41:8081/word/domain/${domainId}`);
+                    setUrl(`https://168.119.85.41:8080/word/domain/${domainId}`);
+                })
+        }
     }
 
-    function showChart(id,index) {
-
+    function showChart(id, index) {
         if (!chartData) {
-            fetch(`http://127.0.0.1:8080/word/${id}`)
+            fetch(`https://168.119.85.41:8080/word/${id}`)
                 .then((response) => {
                     return response.json();
                 }).then((response) => {
                 setChartData(response);
+                setIndexChart(index)
                 setWordId(id);
-                window.scrollTo(0, (50 * (index+1))+260);
             });
         } else {
             setChartData();
         }
     }
 
-    const rows = data1.map((row,index) => {
+    const rows = data1.map((row, index) => {
         if (row.message) {
             return <p className="errorCode">{row.message}</p>
         }
@@ -180,7 +185,7 @@ export default function App() {
             {!stateDomain && <button className="backButton" onClick={backClick}></button>}
         </div>
         <div className="footer">
-            <h6><a href="http://www.github.com/mahdi1280">DEV.MK 🤏</a></h6>
+            <h6><a href="https://www.github.com/mahdi1280">DEV.MK 🤏</a></h6>
         </div>
     </React.Fragment>
 }

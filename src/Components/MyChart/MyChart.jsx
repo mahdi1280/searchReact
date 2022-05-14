@@ -29,25 +29,32 @@ const options = {
     },
     scales: {
         y1: {
-            grid:{
-                color:'rgba(117, 117, 117, 0.4)'
+            grid: {
+                color: 'rgba(117, 117, 117, 0.4)'
             },
             type: 'linear',
             display: true,
             position: 'left',
             reverse: true
         },
-        x1:{
+        x1: {
             reverse: true
         }
     }
 };
 
 
-export default function MyChart({chartData,chartLabel}) {
+export default function MyChart({chartData, chartLabel}) {
 
     const data = {
-        labels: chartData.time,
+        labels: chartData.time.map(item => new Date(item).toLocaleDateString('fa-IR', {
+            day: '2-digit',
+            year: 'numeric',
+            month: '2-digit',
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric',
+        })),
         datasets: [
             {
                 label: chartLabel,
@@ -62,8 +69,8 @@ export default function MyChart({chartData,chartLabel}) {
 
 
     return (<tr className="chart">
-        <td colSpan={5}>
-            <div className="chart" id="chart">
+        <td id="chart" colSpan={5}>
+            <div className="chart">
                 <Line options={options} data={data}/>
             </div>
         </td>
