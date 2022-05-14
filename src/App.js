@@ -5,8 +5,10 @@ import Spinner from './style/svg/Magnify-1.9s-231px.gif';
 import UrlTableHeader from './Components/UrlTableHeader';
 import WordTableHeader from './Components/WordTableHeader';
 import TableWord from "./Components/TableWord";
-import Form from "./Components/Form";
+import FormDomain from "./Components/FormDomain";
 import MyChart from "./Components/MyChart";
+import Header from "./Components/Header";
+import FormWord from "./Components/FormWord";
 
 export default function App() {
 
@@ -19,7 +21,7 @@ export default function App() {
     const [refreshId, setRefreshId] = useState([]);
     const [chartData, setChartData] = useState();
     const [wordId, setWordId] = useState();
-    const [indexChart,setIndexChart] = useState();
+    const [indexChart, setIndexChart] = useState();
 
     function clickHandler(id, url) {
         setSearch(true);
@@ -44,8 +46,8 @@ export default function App() {
     }, [url])
 
     useEffect(() => {
-        window.scrollTo(0, (indexChart+1)*40 + 240);
-    },[indexChart]);
+        window.scrollTo(0, (indexChart + 1) * 40 + 240);
+    }, [indexChart]);
 
     function handlerSaveUrlClick(text) {
         const requestOptions = {
@@ -168,8 +170,10 @@ export default function App() {
             <MyChart chartLabel={row.title} chartData={chartData}/> : null}</React.Fragment>;
     });
     return <React.Fragment>
-        {stateDomain && <Form handlerSaveUrlClick={handlerSaveUrlClick}/>}
-        {!stateDomain && <Form handlerSaveUrlClick={handlerSaveWordClick}/>}
+        <Header>
+            {stateDomain ? <FormDomain handlerSaveUrlClick={handlerSaveUrlClick}/> :
+                <FormWord handlerSaveUrlClick={handlerSaveWordClick}/>}
+        </Header>
         {domain && <p className="urlName">Target: {domain}</p>}
         <table>
             {stateDomain && <UrlTableHeader/>}

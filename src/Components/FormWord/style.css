@@ -1,0 +1,73 @@
+.saveButton{
+  color: white;
+  font-size: 20px;
+  border:0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-left: 10px;
+  background: #3E92CC;
+
+}
+input.textBoxSave {
+  background: transparent;
+  border: 0;
+  color: white;
+  padding: 16px;
+  margin-right: 8px;
+}
+.saveSection {
+  padding: 8px 24px;
+  border-radius: 16px;
+  background-color: #222;
+}
+.textBoxSave{
+  font-size: 20px;
+}
+
+.textBoxSave:focus{
+  outline: none;
+}
+
+.logoSection img {
+  height: 120px;
+  margin-bottom: 16px;
+  margin-right: -8px;
+}
+
+.marginNone{
+  margin: 0;
+}
+
+.subHeader{
+  color:#757575;
+}
+
+.aniLocation{
+  animation: aniLocation 1s linear;
+}
+
+@keyframes aniLocation {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 290px;
+  }
+}
+
+.formWord{
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: 300px;
+  margin-top: 256px;
+}
+
+.dropDownButton{
+  background-image: url("dropDownIcon.png");
+  border: 0;
+  padding: 12px;
+  margin-right: 8px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

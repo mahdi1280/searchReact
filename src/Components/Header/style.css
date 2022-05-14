@@ -1,0 +1,13 @@
+.form{
+  height: 170px;
+  border-radius: 32px;
+  backdrop-filter: blur(8px);
+  color: white;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  margin-top: 30px;
+}
